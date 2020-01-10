@@ -14,7 +14,9 @@ namespace GuardClauses.UnitTests
       from rangeFrom in DateTimes()
       from rangeTo in DateTimes()
       where rangeTo > rangeFrom
-      select new DateTimeRange {RangeFrom = rangeFrom, RangeTo = rangeTo};
+      from testTime in DateTimes()
+      where (testTime >= rangeFrom) && (testTime <= rangeFrom)
+      select new DateTimeRange {RangeFrom = rangeFrom, RangeTo = rangeTo, Actual = testTime};
 
     public static Gen<DateTime> GenerateDateTimeInRange(DateTime rangeFrom, DateTime rangeTo) =>
       from dt in DateTimes()
